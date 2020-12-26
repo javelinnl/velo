@@ -5,6 +5,19 @@ grf {
 	url						: string(STR_GRF_URL);
 	version					: 0;
 	min_compatible_version	: 0;
+	param 0 {
+	color_select {
+		type:		int;
+		name:		string(STR_PARAMETER_NAME);
+		desc:		string(STR_PARAMETER_DESC);
+		min_value: 	0;
+		max_value: 	1;
+		def_value: 	0;
+		names: {
+			0: string(STR_PARAMETER_OPT0);
+			1: string(STR_PARAMETER_OPT1);
+		};
+	}}
 }
 
 //*Over/underlay
@@ -33,9 +46,21 @@ template tmpl_lay() {
 [ 240,	80,		64,	31,		-32,	0]
 }
 
-spriteset(overlayset, "gfx/overlay.png") {
+spriteset(overlaysetred, "gfx/overlayred.png") {
 tmpl_lay()
 }
+
+spriteset(overlaysetgreen, "gfx/overlaygreen.png") {
+tmpl_lay()
+}
+
+switch (FEAT_TRAMTYPES, SELF, overlay_switch, param[0]) {
+	0: return overlaysetred;
+	1: return overlaysetgreen;
+	overlaysetred;
+}
+
+
 
 spriteset(underlayset, "gfx/underlay.png") {
 tmpl_lay()
@@ -99,7 +124,7 @@ item(FEAT_TRAMTYPES, BIKE) {
     }
     graphics {
 		gui:				gui;
-		track_overlay:		overlayset;
+		track_overlay:		overlay_switch;
         underlay:			underlayset;
         bridge_surfaces:	bridge;
         depots:				depotset;

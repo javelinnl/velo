@@ -5,6 +5,12 @@ STR_GRF_NAME				:{TITLE}
 STR_GRF_DESCRIPTION			:{BLUE}{TITLE} {VERSION}{}{WHITE}{}The bicycle experience{}{}{BROWN}By Javelin{ORANGE}NL{}
 STR_GRF_URL					:https://github.com/javelinnl/velo
 
+#
+STR_PARAMETER_NAME	:Lane color
+STR_PARAMETER_DESC	:Red/green lane surface
+STR_PARAMETER_OPT0	:Red
+STR_PARAMETER_OPT1	:Green
+
 #Tracktypes
 
 STR_TRACK_TYPE		:Bike lane
