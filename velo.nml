@@ -1,0 +1,166 @@
+grf {
+	grfid					: "JV\55\01";
+	name					: string(STR_GRF_NAME);
+	desc					: string(STR_GRF_DESCRIPTION);
+	url						: string(STR_GRF_URL);
+	version					: 0;
+	min_compatible_version	: 0;
+}
+
+//*Over/underlay
+
+template tmpl_lay() {
+[	0,	0,		64,	31,		-32,	0]
+[  80,	0,		64,	31,		-32,	0]
+[ 160,	0,		64,	31,		-32,	0]
+[ 240,	0,		64,	31,		-32,	0]
+[ 320,	0,		64,	31,		-32,	0]
+[ 400,	0,		64,	31,		-32,	0]
+[ 480,	0,		64,	31,		-32,	0]
+
+[	0,	40,		64,	31,		-32,	0]
+[  80,	40,		64,	31,		-32,	0]
+[ 160,	40,		64,	31,		-32,	0]
+[ 240,	40,		64,	31,		-32,	0]
+[ 320,	40,		64,	39,		-32,	-8]
+[ 400,	40,		64,	23,		-32,	0]
+[ 480,	40,		64,	23,		-32,	0]
+[ 560,	40,		64,	39,		-32,	-8]
+
+[	0,	80,		64,	31,		-32,	0]
+[  80,	80,		64,	31,		-32,	0]
+[ 160,	80,		64,	31,		-32,	0]
+[ 240,	80,		64,	31,		-32,	0]
+}
+
+spriteset(overlayset, "gfx/overlay.png") {
+tmpl_lay()
+}
+
+spriteset(underlayset, "gfx/underlay.png") {
+tmpl_lay()
+}
+
+//*Bridgetracks
+
+spriteset(bridge, "gfx/bridgetrack.png") {
+[ 66,    1,		64,	31,		-31, 0]
+[  1,    1,		64,	31,		-31, 0]
+
+[131,    1,		64,	39,		-31,-8]
+[196,    1,		64,	23,		-31, 0]
+[261,    1,		64,	23,		-31, 0]
+[326,    1,		64,	39,		-31,-8]
+}
+
+//*Gui
+
+spriteset(gui, "gfx/gui.png") {
+[  0, 	0, 		20, 13, 	0, 0]
+[ 32, 	0, 		20, 13, 	0, 0]
+[ 64, 	0, 		20, 20, 	0, 0]
+[ 96, 	0, 		20, 20, 	0, 0]
+[128, 	0, 		20, 20, 	0, 0]
+[160, 	0, 		20, 20, 	0, 0]
+
+[  0, 	32,		48, 36, 	-19, -9]
+[ 64, 	32,		48, 36, 	-19, -8]
+[128, 	32,		32, 32, 	0, 0]
+[172, 	32,		32, 32, 	0, 0]
+[216, 	32,		32, 32, 	0, 0]
+[260, 	32,		32, 32, 	0, 0]
+}
+
+//*Depot
+
+spriteset(depotset, "gfx/depot.png") {
+[ 42,	85, 	24, 28, 	 0 , 0]   
+[  2,	24, 	64, 58,	  	 0 , -42] 
+[ 82,	85, 	24, 28,	 	-23, 1] 
+[ 82,	24, 	64, 58,	 	-63, -41]
+[242,	24, 	64, 58, 	-56, -45]
+[162,	24, 	64, 58,  	-6 , -46] 
+}
+
+//*Tram Type
+
+item(FEAT_TRAMTYPES, BIKE) {
+		property {
+        label:                      "BIKE";
+		introduction_date: 			date(1910,1,1);
+        name:                       string(STR_TRACK_TYPE);
+		toolbar_caption: 			string(STR_CONSTRUCTION);
+        menu_text:                  string(STR_MENU);
+        build_window_caption:       string(STR_BUILD_CAPTION);
+        autoreplace_text:           string(STR_AUTOREPLACE);
+        new_engine_text:            string(STR_NEW_ENGINE);
+        construction_cost:          10;
+        speed_limit:                50 km/h;
+    }
+    graphics {
+		gui:				gui;
+		track_overlay:		overlayset;
+        underlay:			underlayset;
+        bridge_surfaces:	bridge;
+        depots:				depotset;
+    }
+}
+
+tramtypetable {
+    BIKE
+}
+
+//*Vehicle spritesets
+
+template tmpl_bike() {
+[ 0, 	0, 		 10, 12,		 -4, -10]
+[ 10,   0, 		 10, 12,		 1, -5]
+[ 20, 	0, 		 10, 12,		  3, -5]
+[ 30, 	0, 		 10, 12,		  1, -1]
+[ 40, 	0, 		 10, 12,		 -4, -7]
+[ 50, 	0, 		 10, 12,		-14, -4]
+[ 60,	0, 		 10, 12,		-12, -9]
+[ 70,	0, 		 10, 12,		 -3, -9]
+}
+
+//
+
+spriteset(vehicle1, "gfx/vehicle1.png") {
+tmpl_bike()
+}
+	
+//*Vehicle Items
+
+item(FEAT_ROADVEHS, veh_1) {
+    property {
+        name:                         	string(STR_VEH1);
+        climates_available:           	ALL_CLIMATES; 
+        introduction_date:            	date(1885, 1, 1);
+        model_life:                   	VEHICLE_NEVER_EXPIRES;
+        vehicle_life:                 	100;
+        reliability_decay:            	20;
+        refittable_cargo_classes:     	bitmask(CC_PASSENGERS);
+        non_refittable_cargo_classes: 	bitmask();
+        loading_speed:                	30; 
+        cost_factor:                  	1;
+        running_cost_factor:          	1;
+        sprite_id:                    	SPRITE_ID_NEW_ROADVEH;
+        speed:                        	20 km/h;
+		tram_type:						BIKE;
+        misc_flags:                   	bitmask(ROADVEH_FLAG_TRAM,ROADVEH_FLAG_NO_BREAKDOWN_SMOKE);
+		refit_cost:                   	0;
+        running_cost_base:            	RUNNING_COST_NONE;       
+
+        power:                        	10 hp;
+        weight:                       	1 ton;
+
+        tractive_effort_coefficient:  	0.3 / 3;
+        air_drag_coefficient:         	0.06;
+		default_cargo_type:				CC_PASSENGERS;
+		cargo_capacity:					1;
+		length:							3;
+    }
+    graphics {
+        default:                        vehicle1;
+    }
+}

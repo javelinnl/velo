@@ -1,0 +1,22 @@
+##grflangid 0x01
+
+#Main grf title and description
+STR_GRF_NAME				:{TITLE}
+STR_GRF_DESCRIPTION			:{BLUE}{TITLE} {VERSION}{}{WHITE}{}The bicycle experience{}{}{BROWN}By Javelin{ORANGE}NL{}
+STR_GRF_URL					:https://github.com/javelinnl/velo
+
+#Tracktypes
+
+STR_TRACK_TYPE		:Bike lane
+STR_CONSTRUCTION	:Bike lane construction
+STR_MENU			:Bike lane construction
+STR_BUILD_CAPTION	:New bicycles
+STR_AUTOREPLACE		:Bike lane
+STR_NEW_ENGINE		:Bike lane
+
+#Vehicles
+
+STR_VEH1			:Grandma bike
+
+
+
