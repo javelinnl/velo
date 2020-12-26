@@ -60,8 +60,6 @@ switch (FEAT_TRAMTYPES, SELF, overlay_switch, param[0]) {
 	overlaysetred;
 }
 
-
-
 spriteset(underlayset, "gfx/underlay.png") {
 tmpl_lay()
 }
@@ -98,7 +96,7 @@ spriteset(gui, "gfx/gui.png") {
 
 //*Depot
 
-spriteset(depotset, "gfx/depot.png") {
+spriteset(depotsetred, "gfx/depotred.png") {
 [ 42,	85, 	24, 28, 	 0 , 0]   
 [  2,	24, 	64, 58,	  	 0 , -42] 
 [ 82,	85, 	24, 28,	 	-23, 1] 
@@ -106,6 +104,23 @@ spriteset(depotset, "gfx/depot.png") {
 [242,	24, 	64, 58, 	-56, -45]
 [162,	24, 	64, 58,  	-6 , -46] 
 }
+
+spriteset(depotsetgreen, "gfx/depotgreen.png") {
+[ 42,	85, 	24, 28, 	 0 , 0]   
+[  2,	24, 	64, 58,	  	 0 , -42] 
+[ 82,	85, 	24, 28,	 	-23, 1] 
+[ 82,	24, 	64, 58,	 	-63, -41]
+[242,	24, 	64, 58, 	-56, -45]
+[162,	24, 	64, 58,  	-6 , -46] 
+}
+
+switch (FEAT_TRAMTYPES, SELF, depot_switch, param[0]) {
+	0: return depotsetred;
+	1: return depotsetgreen;
+	depotsetred;
+}
+
+
 
 //*Tram Type
 
@@ -127,7 +142,7 @@ item(FEAT_TRAMTYPES, BIKE) {
 		track_overlay:		overlay_switch;
         underlay:			underlayset;
         bridge_surfaces:	bridge;
-        depots:				depotset;
+        depots:				depot_switch;
     }
 }
 
